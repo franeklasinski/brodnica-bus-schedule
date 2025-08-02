@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rozkład Jazdy - Brodnica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/background-options.css') }}?v=5">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-bus"></i> Rozkład Jazdy Brodnica</h1>
+                <p class="subtitle">Kujawsko-Pomorskie • Aktualny rozkład autobusów miejskich</p>
+                <div class="schedule-info" id="scheduleInfo">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span id="dayTypeInfo">Ładowanie informacji o rozkładzie...</span>
+                </div>
+                <div class="current-time" id="currentTime"></div>
+                <div class="refresh-indicator" id="refreshIndicator">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Odświeżanie co 30s</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="route-planner" id="routePlanner">
+                <h2><i class="fas fa-route"></i> Zaplanuj podróż</h2>
+                <div class="journey-form">
+                    <div class="form-group">
+                        <label for="fromStop">
+                            <i class="fas fa-map-marker-alt"></i> Skąd jedziesz?
+                        </label>
+                        <select id="fromStop" class="stop-select">
+                            <option value="">Wybierz przystanek startowy...</option>
+                        </select>
+                    </div>
+
+                    <div class="swap-button-container">
+                        <button id="swapStops" class="swap-btn" title="Zamień kierunek">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="toStop">
+                            <i class="fas fa-flag-checkered"></i> Dokąd jedziesz?
+                        </label>
+                        <select id="toStop" class="stop-select">
+                            <option value="">Wybierz przystanek docelowy...</option>
+                        </select>
+                    </div>
+
+                    <button id="findRoutes" class="find-routes-btn" disabled>
+                        <i class="fas fa-search"></i> Znajdź połączenia
+                    </button>
+                </div>
+            </section>
+
+            <section class="route-results" id="routeResults" style="display: none;">
+                <div class="results-header">
+                    <h2 id="routeTitle"></h2>
+                    <button class="back-btn" id="backToPlanner">
+                        <i class="fas fa-arrow-left"></i> Powrót do planera
+                    </button>
+                </div>
+                
+                <div class="routes-container" id="routesContainer">
+                </div>
+            </section>
+        </main>
+
+        <!-- AI Chatbot -->
+        <div class="ai-chatbot" id="aiChatbot">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> Asystent Komunikacyjny</h3>
+                <button class="chatbot-toggle" id="chatbotToggle">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="chatbot-content" id="chatbotContent">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message bot-message">
+                        <div class="message-content">
+                            <i class="fas fa-robot"></i>
+                            Cześć! Jestem asystentem komunikacyjnym. Mogę pomóc Ci znaleźć najlepsze połączenia autobusowe w Brodnicy. Po prostu napisz skąd i dokąd chcesz jechać!
+                        </div>
+                    </div>
+                </div>
+                <form class="chat-input-form" id="chatForm">
+                    <input type="text" id="chatInput" placeholder="Napisz pytanie o autobusach..." required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="legend-section">
+                <h3><i class="fas fa-info-circle"></i> Legenda</h3>
+                <div class="legend-content" id="legendContent">
+                </div>
+            </div>
+            <p>&copy; 2025 Rozkład Jazdy Brodnica - Aktualne informacje o komunikacji miejskiej</p>
+        </footer>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Ładowanie danych...</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}?v=5"></script>
+</body>
+</html>
